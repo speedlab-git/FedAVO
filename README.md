@@ -1,3 +1,2 @@
 # FedAVO
 
-![stop](stopsign.jpg)
