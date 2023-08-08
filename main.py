@@ -9,24 +9,31 @@ import torch
 from train import *
 import math
 
-
-OPTIMIZERS = ['adam', 'sgd']
+DATASETS=['cifar10,mnist,fmnist,lisa']
 SPLITS = ['iid','non_iid']
+OPTIMIZERS=['fedavg','fedavo']
 def read_options():
     ''' Parse command line arguments or load defaults '''
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('--optimizer',
-                        help='name of optimizer;',
+    
+    parser.add_argument('--dataset',
+                        help='Datasets for training;',
                         type=str,
-                        choices=OPTIMIZERS,
-                        default='adam')
+                        choices=DATASETS,
+                        default='mnist')
 
     parser.add_argument('--data_split',
                         help='Data Split type;',
                         type=str,
                         choices=SPLITS,
                         default='iid')
+                    
+    parser.add_argument('--optimizer',
+                        help='name of optimizer;',
+                        type=str,
+                        choices=OPTIMIZERS,
+                        default='fedavo')
 
     parser.add_argument('--num_rounds',
                         help='number of communication rounds to simulate;',
@@ -37,24 +44,29 @@ def read_options():
                         help='number of clients trained per round;',
                         type=int,
                         default=10)
+
     parser.add_argument('--batch_size',
                         help='batch size when clients train on data;',
                         type=int,
                         default=4)
+
     parser.add_argument('--num_epochs', 
                         help='number of epochs when clients train on data;',
                         type=int,
                         default=5)
 
+    parser.add_argument('--tuning_epoch', 
+                        help='number of epochs for hyperparameter tuning;',
+                        type=int,
+                        default=1)
+
+
     parser.add_argument('--learning_rate',
-                        help='learning rate for inner solver;',
+                        help='learning rate for fedavg;',
                         type=float,
                         default=0.003)
 
-    parser.add_argument('--poison',
-                        help='Poison level in Percentage',
-                        type=int,
-                        default=20)
+
     
 
 
@@ -64,7 +76,7 @@ def read_options():
 
 
     # load selected model
-    print( style.YELLOW+" \n OPTIMIZER:"+ str(parsed["optimizer"])+" \n Data Split:"+ str(parsed["data_split"])+"\n COMM_ROUNDS:"+ str(parsed["num_rounds"])+" \n POISON CLIENTS:"+ str(parsed["clients_per_round"])+" \n BATCH SIZE:"+ str(parsed["batch_size"])+" \n LOCAL EPOCHS:"+ str(parsed["num_epochs"])+" \n LEARNING RATE:"+ str(parsed["learning_rate"])+" \n POISON LEVEL:"+ str(parsed["poison"]))
+    print( style.YELLOW+" \n DATASET:"+ str(parsed["dataset"])+" \n OPTIMIZER:"+ str(parsed["optimizer"])+" \n Data Split:"+ str(parsed["data_split"])+"\n COMM_ROUNDS:"+ str(parsed["num_rounds"])+" \n POISON CLIENTS:"+ str(parsed["clients_per_round"])+" \n BATCH SIZE:"+ str(parsed["batch_size"])+" \n LOCAL EPOCHS:"+ str(parsed["num_epochs"])+" \n TUNING EPOCH:"+ str(parsed["tuning_epoch"])+" \n LEARNING RATE:"+ str(parsed["learning_rate"]))
 
 
     return parsed
@@ -78,9 +90,8 @@ def main():
     
     parsed =  read_options()
     
-    poison_level = parsed["poison"]
     num_clients= parsed["clients_per_round"]
-    poison_clients =  math.ceil( num_clients * (poison_level/100))
+
     print(poison_clients)
     if(poison_clients> num_clients ):
         logging.error("Poison level can not be greater than 100 %")
