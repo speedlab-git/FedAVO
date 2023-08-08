@@ -92,12 +92,14 @@ def main():
     
     num_clients= parsed["clients_per_round"]
 
-    print(poison_clients)
-    if(poison_clients> num_clients ):
-        logging.error("Poison level can not be greater than 100 %")
-    else:
-        train(batch_size= parsed["batch_size"]
-     ,poison=poison_clients,data_split=parsed["data_split"],optimizer=parsed["optimizer"],comm_rounds = parsed["num_rounds"], local_epochs= parsed["num_epochs"], lr= parsed["learning_rate"], num_clients= parsed["clients_per_round"]  )
+
+ 
+    train(dataset= parsed["dataset"],batch_size= parsed["batch_size"]
+     ,data_split=parsed["data_split"],optimizer=parsed["optimizer"],comm_rounds = parsed["num_rounds"],
+      local_epochs= parsed["num_epochs"], 
+      lr= parsed["learning_rate"],htepochs=parsed["tuning_epoch"],
+
+      num_clients= parsed["clients_per_round"]  )
 
 
 
