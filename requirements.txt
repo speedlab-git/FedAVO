@@ -1,0 +1,7 @@
+numpy
+matplotlib
+tqdm
+pickle
+torch
+torchvision 
+torchaudio 
