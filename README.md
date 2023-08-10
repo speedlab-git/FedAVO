@@ -58,7 +58,20 @@ python3 main.py --optimizer= fedavo \
 
 This will execute the `main.py` file, which contains the main code for the project. 
 
+
+**GUIDELINES**: 
+FedAVO can be integrated with any federated learning method and can train on any dataset.\ To get the optimal tuning, the Problem space can be modified.
+
+```
+python3 main.py --optimizer= fedavo \
+--data_split=iid --num_rounds=400 \
+--clients_per_round=10 --batch_size = 4\
+--num_epochs=5 --tuning_epoch=3 --train_samples=500
+```
+
+
+
 ## EXPERIMENTAL RESULTS
 
-<img src="FashionAcccorr.png" width="300"> <img src="non-iid-CIFAR.png" width="300"> <img src="non-iid-mnist_upd.png" width="300">
+<img src="FashionAcccorr.png" width="250"> <img src="non-iid-CIFAR.png" width="250"> <img src="non-iid-mnist_upd.png" width="250">
 
