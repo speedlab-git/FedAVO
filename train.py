@@ -159,7 +159,11 @@ def average_models(model, clients_models_hist:list , weights:list):
     return new_model
       
 
-def FedProx(model, training_sets:list, n_iter:int, testing_sets:list, mu=0, 
+
+
+
+
+def FedAVO(model, training_sets:list, n_iter:int, testing_sets:list, mu=0, 
     file_name="test", epochs=5,tuning_epoch=1,data_split='iid'):
 
 #     model = OriginalAVOA(problem,epoch=50,pop_size=50)
@@ -319,7 +323,7 @@ lr,num_clients,tuning_epoch):
           
 
     n_iter = comm_rounds
-    model_f, loss_hist_FA_iid, acc_hist_FA_iid,server_accuracy_list,server_loss_list,grads,gradients = FedProx( model, 
+    model_f, loss_hist_FA_iid, acc_hist_FA_iid,server_accuracy_list,server_loss_list,grads,gradients = FedAVO(model, training_sets, n_iter, testing_sets)( model, 
     train_dls, n_iter, test_dls, epochs =local_epochs,tuning_epoch=tuning_epoch,data_split=data_split)
 
 
