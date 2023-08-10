@@ -76,3 +76,7 @@ problem = {
 
 <img src="FashionAcccorr.png" width="250"> <img src="non-iid-CIFAR.png" width="250"> <img src="non-iid-mnist_upd.png" width="250">
 
+## REFERENCES 
+See our [FedAVO](https://arxiv.org/abs/2305.01154) paper for more details as well as all references.
+
+
