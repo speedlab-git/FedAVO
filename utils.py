@@ -72,17 +72,3 @@ class Visualize():
         imshow(torchvision.utils.make_grid(images,padding=1))
 
 
-problem_niid = {
-                    "fit_func":objective_function ,
-                    "lb": [0.1,0.0000000001,0.0000000001 ],
-                    "ub": [0.1,0.000000001 ,0.000000001],
-                    "minmax": "min",
-                }
-
-                
-problem_iid = {
-                    "fit_func":objective_function ,
-                    "lb": [0.01,0.5,0.000000001 ],
-                    "ub": [0.01,0.9 ,0.000001],
-                    "minmax": "min",
-                }
