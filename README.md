@@ -53,7 +53,7 @@ To run the project, use the following command in your terminal:
 python3 main.py --optimizer= fedavo \
 --data_split=iid --num_rounds=400 \
 --clients_per_round=10 --batch_size = 4\
---num_epochs=5 --tuning_epoch=3 --
+--num_epochs=5 --tuning_epoch=3 --train_samples=500
 ```
 
 This will execute the `main.py` file, which contains the main code for the project. 
