@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 class FMNISTCNN(nn.Module):
     
     def __init__(self):
-        super(CNN, self).__init__()
+        super(FMNISTCNN, self).__init__()
         
         self.convlayer1 = nn.Sequential(
             nn.Conv2d(1, 32, 3,padding=1),

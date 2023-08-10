@@ -9,7 +9,7 @@ import torch
 from train import *
 import math
 
-DATASETS=['cifar10,mnist,fmnist,lisa']
+DATASETS=['cifar10','mnist','fmnist','lisa']
 SPLITS = ['iid','non_iid']
 OPTIMIZERS=['fedavg','fedavo']
 def read_options():
@@ -86,7 +86,7 @@ def read_options():
 
 
     # load selected model
-    print( style.YELLOW+" \n DATASET:"+ str(parsed["dataset"])+" \n OPTIMIZER:"+ str(parsed["optimizer"])+" \n Data Split:"+ str(parsed["data_split"])+"\n COMM_ROUNDS:"+ str(parsed["num_rounds"])+" \n POISON CLIENTS:"+ str(parsed["clients_per_round"])+" \n BATCH SIZE:"+ str(parsed["batch_size"])+" \n LOCAL EPOCHS:"+ str(parsed["num_epochs"])+" \n TUNING EPOCH:"+ str(parsed["tuning_epoch"])+" \n LEARNING RATE:"+ str(parsed["learning_rate"]))
+    print( style.YELLOW+" \n DATASET:"+ str(parsed["dataset"])+" \n OPTIMIZER:"+ str(parsed["optimizer"])+" \n Data Split:"+ str(parsed["data_split"])+"\n COMM_ROUNDS:"+ str(parsed["num_rounds"])+" \nCLIENTS:"+ str(parsed["clients_per_round"])+" \n BATCH SIZE:"+ str(parsed["batch_size"])+" \n LOCAL EPOCHS:"+ str(parsed["num_epochs"])+" \n TUNING EPOCH:"+ str(parsed["tuning_epoch"])+" \n LEARNING RATE:"+ str(parsed["learning_rate"]))
 
 
     return parsed
@@ -107,7 +107,7 @@ def main():
     train(dataset= parsed["dataset"],batch_size= parsed["batch_size"]
      ,data_split=parsed["data_split"],n_samples_train=["train_samples"], n_samples_test=["test_samples"], optimizer=parsed["optimizer"],comm_rounds = parsed["num_rounds"],
       local_epochs= parsed["num_epochs"], 
-      lr= parsed["learning_rate"],htepochs=parsed["tuning_epoch"],
+      lr= parsed["learning_rate"],tuning_epoch=parsed["tuning_epoch"],
 
       num_clients= parsed["clients_per_round"]  )
 

@@ -80,6 +80,8 @@ def  get_FASHION(type="iid", n_samples_train=200, n_samples_test=100, n_clients=
         return train, test
 
 def  get_MNIST(type="iid", n_samples_train=200, n_samples_test=100, n_clients=3, batch_size=25, shuffle=True):
+  
+    print(batch_size)
     dataset_loaded_train = datasets.MNIST(
             root="./data",
             train=True,

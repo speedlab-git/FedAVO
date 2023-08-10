@@ -43,7 +43,7 @@ def iid_split(dataset, nb_nodes, n_samples_per_node, batch_size, shuffle):
         # load and shuffle n_samples_per_node from the dataset
 
         loader = torch.utils.data.DataLoader(dataset,
-                                            batch_size=n_samples_per_node,
+                                            batch_size=batch_size,
                                             shuffle=shuffle)
         dataiter = iter(loader)
         X,Y= next(iter(loader))

@@ -30,6 +30,10 @@ import matplotlib.pyplot as plt
 from models.lisa import *
 from utils import *
 
+from training_utils import *
+from tqdm import tqdm
+
+
 def FedAVG(model, training_sets:list, n_iter:int,  testing_sets:list, mu=0, 
     file_name="test", epochs=5, lr=10**-2):
 

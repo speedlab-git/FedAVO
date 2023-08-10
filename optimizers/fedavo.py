@@ -30,7 +30,9 @@ import matplotlib.pyplot as plt
 from models.lisa import *
 from utils import *
 
-
+from training_utils import *
+from tqdm import tqdm
+from mealpy.swarm_based.AVOA import OriginalAVOA
 
 def FedAVO(model, training_sets:list, n_iter:int, testing_sets:list, mu=0, 
     file_name="test", epochs=5,tuning_epoch=1,data_split='iid'):
@@ -92,24 +94,7 @@ def FedAVO(model, training_sets:list, n_iter:int, testing_sets:list, mu=0,
                     clients_param.append(list_params)    
                     clients_model.append(deepcopy(local_model))
                     return local_loss
-                    
-                
-                
-                # problem = {
-                #     "fit_func":objective_function ,
-                #     "lb": [0.1,0.0000000001,0.0000000001 ],
-                #     "ub": [0.1,0.000000001 ,0.000000001],
-                #     "minmax": "min",
-                # }
 
-                
-                
-                # problem = {
-                #     "fit_func":objective_function ,
-                #     "lb": [0.01,0.5,0.000000001 ],
-                #     "ub": [0.01,0.9 ,0.000001],
-                #     "minmax": "min",
-                # }
                 model_hyper = OriginalAVOA(epoch=tuning_epoch,pop_size=50)
 
                 if(data_split=='iid'):
