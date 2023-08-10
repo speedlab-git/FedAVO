@@ -74,5 +74,5 @@ problem = {
 
 ## EXPERIMENTAL RESULTS
 
-<img src="FashionAcccorr.png" width="250"> <img src="non-iid-CIFAR.png" width="250"> <img src="non-iid-mnist_upd.png" width="250">
+<img src="figures/FashionAcccorr.png" width="250"> <img src="figures/non-iid-CIFAR.png" width="250"> <img src="figures/non-iid-mnist_upd.png" width="250">
 
