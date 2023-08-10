@@ -5,11 +5,10 @@ import torch.optim as optim
 from copy import deepcopy
 import numpy as np
 import matplotlib.pyplot as plt
-from models.cnn import *
 
 def ConvLayer(inp, out, ks=3, s=1, p=1):
   return nn.Conv2d(inp, out, kernel_size=ks, stride=s, padding=p)
-class Model(nn.Module):
+class LISACNN(nn.Module):
   def __init__(self):
     super().__init__()
     self.neural_net = nn.Sequential(
@@ -29,6 +28,10 @@ class Model(nn.Module):
     )
   def forward(self, x):
     return self.neural_net(x)
-    
+  
+
+
+
+  
 
 # model= nn.DataParallel(model)

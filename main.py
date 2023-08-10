@@ -28,7 +28,17 @@ def read_options():
                         type=str,
                         choices=SPLITS,
                         default='iid')
-                    
+    
+    parser.add_argument('--train_samples',
+                        help='Training Samples;',
+                        type=int,
+                        default=500)  
+
+    parser.add_argument('--test_samples',
+                        help='Test Samples;',
+                        type=int,
+                        default=50)
+
     parser.add_argument('--optimizer',
                         help='name of optimizer;',
                         type=str,
@@ -95,7 +105,7 @@ def main():
 
  
     train(dataset= parsed["dataset"],batch_size= parsed["batch_size"]
-     ,data_split=parsed["data_split"],optimizer=parsed["optimizer"],comm_rounds = parsed["num_rounds"],
+     ,data_split=parsed["data_split"],n_samples_train=["train_samples"], n_samples_test=["test_samples"], optimizer=parsed["optimizer"],comm_rounds = parsed["num_rounds"],
       local_epochs= parsed["num_epochs"], 
       lr= parsed["learning_rate"],htepochs=parsed["tuning_epoch"],
 

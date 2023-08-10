@@ -13,8 +13,11 @@ from torchvision import transforms
 import matplotlib.pyplot as plt
 import numpy as np
 
-from loaders.LISA import *
-
+from loaders.loader import *
+from models.cifar import *
+from models.mnist import *
+from models.lisa import *
+from models.fmnist import *
 from torch.utils.data import TensorDataset, DataLoader
 
 from numpy import random
@@ -24,7 +27,7 @@ import torch.optim as optim
 from copy import deepcopy
 import numpy as np
 import matplotlib.pyplot as plt
-from models.cnn import *
+from models.lisa import *
 from utils import *
 import pickle
 
@@ -34,32 +37,6 @@ else:
         device = torch.device("cpu")
 
 print(style.GREEN+ "\n Runtime Device:" + str(device))
-
-def augmentClientData(dataloader,batch_size):
-    from PIL import Image
-    import torchvision.transforms as T
-    augmented_x=[]
-    augmented_y=[]
-    transform=transforms.Compose([
-                              transforms.RandomHorizontalFlip(),
-                              transforms.RandomVerticalFlip(),
-                              transforms.RandomRotation((30,90)),
-                              transforms.RandomCrop([28, 28]),transforms.CenterCrop(10),
-                              transforms.ColorJitter(brightness=(0.5,1.5),contrast=(1),saturation=(0.5,2),hue=(-0.1,0.4)),
-                              transforms.Resize([32,32]),
-                          ])
-    for i in range(len((dataloader))):
-        batch_x, batch_y = next(iter(dataloader))
-        for j in range (len(batch_x)):
-            batch_x[j]= transform(batch_x[j])
-            augmented_x.append(batch_x[j])
-            augmented_y.append(batch_y[j])
-    tensor_x = torch.stack(augmented_x) # transform to torch tensor
-    tensor_y = torch.stack(augmented_y)
-    augmented_dataset = TensorDataset(tensor_x,tensor_y) # create your datset
-    augmented_dataloader = DataLoader(augmented_dataset,batch_size=batch_size, shuffle=True)
-    return augmented_dataloader
-
 
 
 def loss_classifier(predictions,labels):
@@ -275,29 +252,43 @@ def FedProx(model, training_sets:list, n_iter:int,  testing_sets:list, mu=0,
 
 
 
-def train (batch_size,poison,data_split,optimizer,comm_rounds,local_epochs,lr,num_clients): 
+def train (dataset,batch_size,poison,data_split,
+n_samples_train,n_samples_test,
+optimizer,comm_rounds,local_epochs,
+lr,num_clients): 
    
 
+    if(dataset == "mnist"):
+        train_dls, test_dls = get_MNIST(data_split,
+        n_samples_train =300, n_samples_test=50, n_clients =num_clients, 
+        batch_size =batch_size, shuffle =True)
 
+        model = MNISTCNN().to(device)
 
-    lisa_iid_train_dls, lisa_iid_test_dls = get_LISA(data_split,
-    n_samples_train =300, n_samples_test=50, n_clients =num_clients, 
-    batch_size =batch_size, shuffle =True)
+    elif(dataset == "cifar10"):
+        train_dls, test_dls = get_CIFAR(data_split,
+        n_samples_train =300, n_samples_test=50, n_clients =num_clients, 
+        batch_size =batch_size, shuffle =True)  
 
+        model = CIFARCNN().to(device)     
 
-    if poison>0:
+    elif(dataset=="fmnist"):
+        train_dls, test_dls = get_FASHION(data_split,
+        n_samples_train =300, n_samples_test=50, n_clients =num_clients, 
+        batch_size =batch_size, shuffle =True)
 
-        poison_idx=random.randint(num_clients-1, size=(poison))
+        model = FMNISTCNN().to(device)
+    else:
+        train_dls, test_dls = get_LISA(data_split,
+        n_samples_train =300, n_samples_test=50, n_clients =num_clients, 
+        batch_size =batch_size, shuffle =True) 
 
-        augs = []
+        model = LISACNN().to(device)
+          
 
-        for i in range (len(poison_idx)):
-            lisa_iid_train_dls[i] = augmentClientData(lisa_iid_train_dls[i],batch_size)
-
-    model = Model().to(device)
     n_iter = comm_rounds
     model_f, loss_hist_FA_iid, acc_hist_FA_iid,server_accuracy_list,server_loss_list,grads,gradients = FedProx( model, 
-    lisa_iid_train_dls, n_iter, lisa_iid_test_dls, epochs =local_epochs)
+    train_dls, n_iter, test_dls, epochs =local_epochs)
 
 
     with open('acc-10-epoch-local-1.pickle', 'wb') as handle:
