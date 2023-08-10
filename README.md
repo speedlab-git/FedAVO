@@ -60,13 +60,14 @@ This will execute the `main.py` file, which contains the main code for the proje
 
 
 **GUIDELINES**: 
-FedAVO can be integrated with any federated learning method and can train on any dataset.\ To get the optimal tuning, the Problem space can be modified.
-
+Integration of FedAVO is feasible with diverse federated learning approaches and adaptable to various datasets.\ By adjusting the problem space (Which can be located in fedavo.py, under optimizers folder), one can achieve optimal tuning.
 ```
-python3 main.py --optimizer= fedavo \
---data_split=iid --num_rounds=400 \
---clients_per_round=10 --batch_size = 4\
---num_epochs=5 --tuning_epoch=3 --train_samples=500
+problem = {
+      "fit_func":objective_function ,
+      "lb": [0.1, 0.0000000001,0.0000000001 ], //lower limit
+      "ub": [0.1,0.000000001 ,0.000000001], // upper limit
+      "minmax": "min"}
+
 ```
 
 
