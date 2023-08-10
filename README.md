@@ -30,7 +30,7 @@ algorithms (such as FedAvg, FedProx, FedPSO, etc.)
 ## System Architecture
 
 
-<img src="sys_arch.png" align="center" width="600">
+<img src="figures/sys_arch.png" align="center" width="600">
 
 
 
