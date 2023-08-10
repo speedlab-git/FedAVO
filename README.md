@@ -26,6 +26,14 @@ fitted for the benchmark datasets, eventually increasing global
 model accuracy by 6% in comparison to the state-of-the-art FL
 algorithms (such as FedAvg, FedProx, FedPSO, etc.)
 
+
+## System Architecture
+
+
+<img src="sys_arch.png" width="450">
+
+
+
 ## Installation
 
 First, you need to install the project dependencies. To do this, navigate to the project directory and run the following command:
