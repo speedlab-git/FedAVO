@@ -58,3 +58,7 @@ python3 main.py --optimizer= sgd \
 
 This will execute the `main.py` file, which contains the main code for the project. 
 
+## EXPERIMENTAL RESULTS
+
+<img src="FashionAcccorr.png" width="350"> <img src="non-iid-CIFAR.png" width="350"> <img src="non-iid-mnist_upd.png" width="350">
+
