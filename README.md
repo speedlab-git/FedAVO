@@ -50,10 +50,10 @@ To run the project, use the following command in your terminal:
 
 **Example**: 
 ```
-python3 main.py --optimizer= sgd \
+python3 main.py --optimizer= fedavo \
 --data_split=iid --num_rounds=400 \
 --clients_per_round=10 --batch_size = 4\
---num_epochs=5 --poison=20
+--num_epochs=5 --tuning_epoch=3 --
 ```
 
 This will execute the `main.py` file, which contains the main code for the project. 
