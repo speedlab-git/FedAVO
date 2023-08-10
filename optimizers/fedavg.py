@@ -32,22 +32,7 @@ from utils import *
 
 def FedAVG(model, training_sets:list, n_iter:int,  testing_sets:list, mu=0, 
     file_name="test", epochs=5, lr=10**-2):
-    """ all the clients are considered in this implementation of FedProx
-    Parameters:
-        - `model`: common structure used by the clients and the server
-        - `training_sets`: list of the training sets. At each index is the 
-            training set of client "index"
-        - `n_iter`: number of iterations the server will run
-        - `testing_set`: list of the testing sets. If [], then the testing
-            accuracy is not computed
-        - `mu`: regularization term for FedProx. mu=0 for FedAvg
-        - `epochs`: number of epochs each client is running
-        - `lr`: learning rate of the optimizer
-        - `decay`: to change the learning rate at each iteration
-    
-    returns :
-        - `model`: the final global model 
-    """
+
         
     loss_f=loss_classifier
     

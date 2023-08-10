@@ -214,7 +214,7 @@ lr,num_clients,tuning_epoch):
     train_dls, n_iter, test_dls, epochs =local_epochs,tuning_epoch=tuning_epoch,data_split=data_split)
     else:
         model_f, loss_hist_FA_iid, acc_hist_FA_iid,server_accuracy_list,server_loss_list,grads,gradients = FedAVG(model, training_sets, n_iter, testing_sets)(model, training_sets, n_iter, testing_sets)( model, 
-    train_dls, n_iter, test_dls, epochs =local_epochs,tuning_epoch=tuning_epoch,data_split=data_split)
+    train_dls, n_iter, test_dls, epochs =local_epochs)
     
     
     
