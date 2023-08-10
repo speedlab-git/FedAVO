@@ -60,5 +60,5 @@ This will execute the `main.py` file, which contains the main code for the proje
 
 ## EXPERIMENTAL RESULTS
 
-<img src="FashionAcccorr.png" width="250"> <img src="non-iid-CIFAR.png" width="250"> <img src="non-iid-mnist_upd.png" width="250">
+<img src="FashionAcccorr.png" width="300"> <img src="non-iid-CIFAR.png" width="300"> <img src="non-iid-mnist_upd.png" width="300">
 
