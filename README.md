@@ -76,6 +76,14 @@ problem = {
 
 <img src="figures/FashionAcccorr.png" width="250"> <img src="figures/non-iid-CIFAR.png" width="250"> <img src="figures/non-iid-mnist_upd.png" width="250">
 
+## Contribution
+@authors 
+- Md Zarif Hossain,<br>
+  Graduate Research Assistant, Southern Illinois University, Carbondale
+  
+- Ahmed Imteaj,<br>
+  Assistant Professor, Southern Illinois University, Carbondale
+
 ## REFERENCES 
 See our [FedAVO](https://arxiv.org/abs/2305.01154) paper for more details as well as all references.
 
