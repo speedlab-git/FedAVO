@@ -60,7 +60,7 @@ This will execute the `main.py` file, which contains the main code for the proje
 
 
 **GUIDELINES**: 
-Integration of FedAVO is feasible with diverse federated learning approaches and adaptable to various datasets.\ By adjusting the problem space (Which can be located in fedavo.py, under optimizers folder), one can achieve optimal tuning.
+Integration of FedAVO is feasible with diverse federated learning approaches and adaptable to various datasets. By adjusting the problem space (Which can be located in fedavo.py, under optimizers folder), one can achieve optimal tuning.
 ```
 problem = {
       "fit_func":objective_function ,
